@@ -5,85 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>discord.gg/uaee</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Courier New', Courier, monospace;
-            color: #0000ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-        .image-container img {
-            width: 750px; 
-            height: auto;
-            border: 2px solid #0000ff; 
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); 
-        }
-        .info {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #0000ff; 
-            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
-            letter-spacing: 4.5px; 
-            white-space: pre-wrap;
-        }
-        .text {
-            margin-top: 20px;
-            font-size: 3em; 
-            color: #0000ff; 
-            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
-            letter-spacing: 4.5px; 
-        }
+        // ...existing code...
     </style>
 </head>
 <body>
     <div class="image-container">
         <img src="https://e.top4top.io/p_3523hgc2r1.gif" alt="Discord Image">
     </div>
-    <audio autoplay loop>
+    
+    <!-- تحديث عنصر الصوت مع إضافة خصائص إضافية -->
+    <audio id="backgroundAudio" autoplay loop muted preload="auto" controls style="display: none;">
         <source src="https://h.top4top.io/m_35324uyb41.mp3" type="audio/mpeg">
+        <source src="https://h.top4top.io/m_35324uyb41.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
+    
     <div class="info" id="ip-info">
-        <strong>IP: <span id="ip">Loading...</span></strong><br>
-        <span><strong>City:</strong> <span id="city">Loading...</span></span><br>
-        <span><strong>Region:</strong> <span id="region">Loading...</span></span><br>
-        <span><strong>Country:</strong> <span id="country">Loading...</span></span><br>
-        <span><strong>Location:</strong> <span id="loc">Loading...</span></span><br>
-        <span><strong>Organization:</strong> <span id="org">Loading...</span></span><br>
-        <span><strong>Timezone:</strong> <span id="timezone">Loading...</span></span>
+        // ...existing code...
     </div>
     <div class="text">discord.gg/s70</div>
 
     <script>
-        fetch('https://ipinfo.io/json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('ip').textContent = data.ip || 'N/A';
-                document.getElementById('city').textContent = data.city || 'N/A';
-                document.getElementById('region').textContent = data.region || 'N/A';
-                document.getElementById('country').textContent = data.country || 'N/A';
-                document.getElementById('loc').textContent = data.loc || 'N/A';
-                document.getElementById('org').textContent = data.org || 'N/A';
-                document.getElementById('timezone').textContent = data.timezone || 'N/A';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('ip').textContent = 'Error loading data';
-                document.getElementById('city').textContent = 'Error';
-                document.getElementById('region').textContent = 'Error';
-                document.getElementById('country').textContent = 'Error';
-                document.getElementById('loc').textContent = 'Error';
-                document.getElementById('org').textContent = 'Error';
-                document.getElementById('timezone').textContent = 'Error';
+        // إضافة سكريبت لتشغيل الصوت
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('backgroundAudio');
+            
+            // محاولة تشغيل الصوت عند النقر في أي مكان على الصفحة
+            document.addEventListener('click', function() {
+                audio.muted = false;
+                audio.play().catch(error => {
+                    console.log('خطأ في تشغيل الصوت:', error);
+                });
+            }, { once: true });
+            
+            // محاولة تشغيل الصوت مباشرة
+            audio.play().catch(error => {
+                console.log('تحتاج إلى تفعيل الصوت يدوياً:', error);
             });
+        });
+
+        // ...existing code...
+        fetch('https://ipinfo.io/json')
+        .then(response => response.json())
+        .then(data => {
+            delete data.readme;
+            const infoDiv = document.getElementById('ip-info');
+            infoDiv.textContent = JSON.stringify(data, null, 2);
+        });
     </script>
 </body>
 </html>
